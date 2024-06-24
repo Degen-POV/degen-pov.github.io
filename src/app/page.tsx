@@ -46,13 +46,16 @@ export default function Home() {
           {/* eslint-enable */}
         </p>
         <div
-          className="mt-4 font-bold flex items-center cursor-pointer relative"
+          className="mt-4 font-bold flex flex-col sm:flex-row items-center cursor-pointer relative justify-center"
           onClick={handleCopy}
         >
-          <span className="mr-2 text-xl">
+          <span className="mr-2 text-xl ca-line text-center">
             CA 0x4c96A67b0577358894407AF7Bc3158fC1DfFbeB5
           </span>
-          <FontAwesomeIcon icon={faCopy} />
+          <FontAwesomeIcon
+            icon={faCopy}
+            className="mt-2 sm:mt-0 mb-2 sm:mb-0 pb-2 sm:pb-0"
+          />
         </div>
       </div>
       {tooltipVisible && (
