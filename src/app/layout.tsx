@@ -26,7 +26,7 @@ export default function RootLayout({
         <meta property="og:title" content="your degen pov" />
         <meta property="og:description" content="We're all degens here..." />
         <meta property="og:image" content="card.png" />
-        <meta property="og:url" content="https://degen-pov.github.io" />
+        <meta property="og:url" content="https://degenpov.me" />
         <meta name="twitter:card" content="card.png" />
         <meta name="twitter:title" content="your degen pov" />
         <meta name="twitter:description" content="We're all degens here..." />
