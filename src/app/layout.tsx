@@ -25,12 +25,12 @@ export default function RootLayout({
       <head>
         <meta property="og:title" content="your degen pov" />
         <meta property="og:description" content="We're all degens here..." />
-        <meta property="og:image" content="/card.png" />
+        <meta property="og:image" content="https://degenpov.me/card.png" />
         <meta property="og:url" content="https://degenpov.me" />
-        <meta name="twitter:card" content="/card.png" />
+        <meta name="twitter:card" content="https://degenpov.me/card.png" />
         <meta name="twitter:title" content="your degen pov" />
         <meta name="twitter:description" content="We're all degens here..." />
-        <meta name="twitter:image" content="/card.png" />
+        <meta name="twitter:image" content="https://degenpov.me/card.png" />
       </head>
       <body className={inter.className}>
         <header className="flex justify-end pr-4 pb-0 mb-0 pt-2 bg-[#26437d] text-4xl">
