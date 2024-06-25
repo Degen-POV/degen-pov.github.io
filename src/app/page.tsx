@@ -35,7 +35,7 @@ export default function Home() {
         />
       </div>
       <div className="mt-8 w-full max-w-2xl text-left pt-2 mt-0">
-        <p className="text-xl font-bold">
+        <p className="text-l font-bold">
           {/* eslint-disable */}
           “Oh, you can't help that,”
           <br />
@@ -47,7 +47,7 @@ export default function Home() {
           <br />
           said Alice.
           <br />
-          “You must be,” said the “Cat, or you wouldn't have come here.”
+          “You must be,” said the Cat, “or you wouldn't have come here.”
           {/* eslint-enable */}
         </p>
         <div
