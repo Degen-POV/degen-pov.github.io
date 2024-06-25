@@ -31,6 +31,7 @@ export default function Home() {
           width={1920}
           height={1080}
           className="w-full h-auto"
+          priority={true}
         />
       </div>
       <div className="mt-8 w-full max-w-2xl text-left pt-2 mt-0">

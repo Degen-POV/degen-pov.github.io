@@ -3,7 +3,10 @@ import { Inter } from "next/font/google";
 import "./globals.css"; // Ensure this is the correct path to your global CSS file
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faDiscord,
+  faRedditAlien,
   faTelegram,
+  faTiktok,
   faTwitter,
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
@@ -52,9 +55,37 @@ export default function RootLayout({
             href="https://t.me/degenpovcto"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#ffff33]"
+            className="mr-2 text-[#ffff33]"
           >
-            <FontAwesomeIcon icon={faTelegram} className="header-icon" />
+            <FontAwesomeIcon
+              icon={faTelegram}
+              className="header-icon"
+              style={{ color: "#ffff33" }}
+            />
+          </a>
+          <a
+            href="https://discord.gg/UvNtN8JyQf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mr-2 text-[#ffff33]"
+          >
+            <FontAwesomeIcon icon={faDiscord} className="header-icon" />
+          </a>
+          <a
+            href="https://www.reddit.com/r/DegenPOVCTO/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mr-2 text-[#ffff33]"
+          >
+            <FontAwesomeIcon icon={faRedditAlien} className="header-icon" />
+          </a>
+          <a
+            href="https://www.tiktok.com/@degenpovcto/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mr-12 text-[#ffff33]"
+          >
+            <FontAwesomeIcon icon={faTiktok} className="header-icon" />
           </a>
         </header>
         {children}
