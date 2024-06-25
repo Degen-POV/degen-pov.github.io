@@ -1,4 +1,4 @@
-@import "@fontsource/just-another-hand"; /* Import the Google Font */
+@import "@fontsource/coming-soon"; /* Import the Google Font */
 
 /* Tailwind base styles */
 @tailwind base;
@@ -16,7 +16,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Just Another Hand", cursive; /* Apply the Google Font */
+  font-family: "Coming Soon", cursive; /* Apply the Google Font */
 }
 
 /* Ensure text wraps at spaces */

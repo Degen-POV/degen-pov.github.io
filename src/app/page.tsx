@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
-import "@fontsource/just-another-hand"; // Import the Google Font
+import "@fontsource/coming-soon"; // Import the Google Font
 
 export default function Home() {
   const [tooltipVisible, setTooltipVisible] = useState(false);
@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <main
       className="relative flex flex-col items-center justify-start min-h-screen bg-[#26437d] text-[#ffff33] p-4 pt-2 mt-0 pb-0 mb-0"
-      style={{ fontFamily: '"Just Another Hand", cursive' }}
+      style={{ fontFamily: '"Coming Soon", cursive' }}
     >
       <div className="w-full pt-0 mt-0">
         <Image
@@ -35,7 +35,7 @@ export default function Home() {
         />
       </div>
       <div className="mt-8 w-full max-w-2xl text-left pt-2 mt-0">
-        <p className="text-3xl font-bold">
+        <p className="text-xl font-bold">
           {/* eslint-disable */}
           “Oh, you can't help that,”
           <br />
@@ -51,10 +51,10 @@ export default function Home() {
           {/* eslint-enable */}
         </p>
         <div
-          className="mt-4 font-bold flex flex-col sm:flex-row items-center cursor-pointer relative justify-center"
+          className="mt-4 pb-4 font-bold flex flex-col sm:flex-row items-center cursor-pointer relative justify-center"
           onClick={handleCopy}
         >
-          <span className="mr-2 text-4xl ca-line text-center">
+          <span className="mr-2 text-2xl hover:underline ca-line text-center">
             CA 0x4c96A67b0577358894407AF7Bc3158fC1DfFbeB5
           </span>
           <FontAwesomeIcon

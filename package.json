@@ -11,7 +11,7 @@
     "lint": "npx next lint"
   },
   "dependencies": {
-    "@fontsource/just-another-hand": "^5.0.12",
+    "@fontsource/coming-soon": "^5.0.12",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
