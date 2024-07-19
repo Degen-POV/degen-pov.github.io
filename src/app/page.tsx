@@ -45,7 +45,7 @@ export default function Home() {
           <br />
           "How do you know I'm a degen?"
           <br />
-          said Alice.
+          said I.
           <br />
           "You must be," said the Cat, "or you wouldn't have come here."
           {/* eslint-enable */}
