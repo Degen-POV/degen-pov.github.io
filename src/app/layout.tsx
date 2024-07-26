@@ -37,7 +37,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <header className="flex justify-end pr-4 pb-0 mb-0 pt-2 bg-[#26437d] text-4xl">
           <a
-            href="/whitepaper/degenpov_whitepaper_v2_3.pdf"
+            href="/whitepaper/degenpov_whitepaper.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="mr-2 text-[#ffff33] hover:text-[#d1d100] transform transition-transform duration-200 hover:scale-110"
