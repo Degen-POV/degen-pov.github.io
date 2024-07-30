@@ -72,7 +72,7 @@ export default function Whitepaper() {
         <div className="flex justify-center items-center mt-2 mb-2 w-full">
           <button
             className="px-4 py-2 mr-2 rounded transform transition-transform duration-200 hover:scale-110 flex items-center"
-            style={{ backgroundColor: '#26437d', color: '#ffff33', fontWeight: 'bold' }}
+            style={{ backgroundColor: '#2e4d8f', color: '#ffff33', fontWeight: 'bold' }}
             onClick={() => setPageNumber(pageNumber - 1)}
             disabled={pageNumber <= 1}
           >
@@ -86,7 +86,7 @@ export default function Whitepaper() {
           </span>
           <button
             className="px-4 py-2 ml-2 rounded transform transition-transform duration-200 hover:scale-110 flex items-center"
-            style={{ backgroundColor: '#26437d', color: '#ffff33', fontWeight: 'bold' }}
+            style={{ backgroundColor: '#2e4d8f', color: '#ffff33', fontWeight: 'bold' }}
             onClick={() => setPageNumber(pageNumber + 1)}
             disabled={pageNumber >= (numPages || 0)}
           >
