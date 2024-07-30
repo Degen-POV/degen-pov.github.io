@@ -33,7 +33,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "dist/types/**/*.ts",
-    "deployment/types/**/*.ts"
+    "deployment/types/**/*.ts",
+    "src/app/whitepaper/page.tsx"
   ],
   "exclude": [
     "node_modules"
