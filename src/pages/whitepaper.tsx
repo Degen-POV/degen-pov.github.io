@@ -1,5 +1,8 @@
 export function generateStaticParams() {
-  return [{}];
+  return [
+    { slug: [] },
+    { slug: ['index'] },
+  ];
 }
 import React, { useState, useEffect, useMemo } from 'react';
 import dynamic from 'next/dynamic';
