@@ -1,3 +1,6 @@
+export function generateStaticParams() {
+  return [{}];
+}
 import React, { useState, useEffect, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 
