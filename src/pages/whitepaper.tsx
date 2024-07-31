@@ -61,7 +61,7 @@ export default function Whitepaper() {
       <div className="flex-grow w-full overflow-hidden flex items-center justify-center bg-gray-100"
       style={{backgroundColor: '#26437d'}} >
         <PDFViewer
-            file="/whitepaper/degenpov_whitepaper.pdf"
+            file="/whitepaper/degenpovwhitepaper.pdf"
             onLoadSuccess={onDocumentLoadSuccess}
             options={options}
           >
