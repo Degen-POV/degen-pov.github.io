@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useState, useEffect, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 
@@ -10,7 +11,13 @@ const PageComponent = dynamic(() => import('react-pdf').then(mod => ({ default: 
   ssr: false,
 });
 
+export function generateStaticParams() {
+  return Array.from({ length: 10 }, (_, i) => ({ id: i.toString() }));
+}
+
 export default function Whitepaper() {
+  const router = useRouter();
+  const { id } = router.query;
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
