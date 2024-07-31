@@ -12,7 +12,7 @@ const PageComponent = dynamic(() => import('react-pdf').then(mod => ({ default: 
 });
 
 export function generateStaticParams() {
-  return Array.from({ length: 10 }, (_, i) => ({ id: i.toString() }));
+  return [{ id: '' }];
 }
 
 export default function Whitepaper() {
