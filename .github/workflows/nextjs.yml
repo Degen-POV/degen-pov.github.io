@@ -58,13 +58,6 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
-      - name: Generate static pages
-        run: |
-          mkdir -p ./deployment/whitepaper
-          cp ./deployment/whitepaper.html ./deployment/whitepaper/index.html
-          for i in {0..999999}; do
-            cp ./deployment/whitepaper.html "./deployment/whitepaper/$i.html"
-          done
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

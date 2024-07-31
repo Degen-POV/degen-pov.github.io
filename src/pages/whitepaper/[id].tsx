@@ -15,6 +15,10 @@ export function generateStaticParams() {
   return [{ id: '' }];
 }
 
+export async function getStaticProps() {
+  return { props: {} };
+}
+
 export default function Whitepaper() {
   const router = useRouter();
   const { id } = router.query;
@@ -51,6 +55,10 @@ export default function Whitepaper() {
 
     return () => window.removeEventListener('resize', updateDimensions);
   }, []);
+
+  useEffect(() => {
+    console.log('Whitepaper ID:', id);
+  }, [id]);
 
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
     setNumPages(numPages);
