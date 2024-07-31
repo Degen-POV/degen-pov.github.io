@@ -1,6 +1,6 @@
-import { useRouter } from 'next/router';
 import React, { useState, useEffect, useMemo } from 'react';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
 const PDFViewer = dynamic(() => import('react-pdf').then(mod => ({ default: mod.Document })), {
   ssr: false,
