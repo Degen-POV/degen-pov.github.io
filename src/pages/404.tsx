@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Whitepaper from './whitepaper/[id]';
 
 export default function Custom404() {
   const router = useRouter();
+  const [content, setContent] = useState<React.ReactNode | null>(null);
 
   useEffect(() => {
     const path = router.asPath;
@@ -12,37 +13,23 @@ export default function Custom404() {
       const id = segments[2];
       if (id && !isNaN(Number(id))) {
         if (path.endsWith('.json')) {
-          // Handle JSON metadata request
           const metadata = generateMetadata(id);
-          const jsonResponse = new Response(JSON.stringify(metadata), {
-            status: 200,
-            headers: { 'Content-Type': 'application/json' },
-          });
-          (window as any).__NEXT_DATA__.props.pageProps.jsonResponse = jsonResponse;
+          setContent(<pre>{JSON.stringify(metadata, null, 2)}</pre>);
         } else {
-          // Handle whitepaper viewer
-          router.push(`/whitepaper/${id}`, undefined, { shallow: true });
+          setContent(<Whitepaper />);
         }
       }
+    } else {
+      setContent(
+        <div>
+          <h1>404 - Page Not Found</h1>
+          <p>The page you are looking for does not exist.</p>
+        </div>
+      );
     }
-  }, [router]);
+  }, [router.asPath]);
 
-  if (router.asPath.startsWith('/whitepaper/') && !router.asPath.endsWith('.json')) {
-    return <Whitepaper />;
-  }
-
-  if (router.asPath.endsWith('.json')) {
-    // Render JSON content
-    const jsonResponse = (window as any).__NEXT_DATA__.props.pageProps.jsonResponse;
-    return <pre>{JSON.stringify(JSON.parse(jsonResponse.body), null, 2)}</pre>;
-  }
-
-  return (
-    <div>
-      <h1>404 - Page Not Found</h1>
-      <p>The page you are looking for does not exist.</p>
-    </div>
-  );
+  return content;
 }
 
 function generateMetadata(id: string) {
