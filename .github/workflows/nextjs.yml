@@ -59,7 +59,7 @@ jobs:
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Move 404 page
-        run: mv ./deployment/404.html ./deployment/404.html
+        run: mv -f ./deployment/404.html ./deployment/404.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
