@@ -131,17 +131,30 @@ export default function Whitepaper({ id, isJson, metadata }: WhitepaperProps) {
 function generateMetadata(id: string) {
   const cleanId = id.replace('.json', '');
   return {
+    platform: "Degen POV",
     name: `Degen POV Whitepaper NFT #${cleanId}`,
+    background_color: "26437d",
+    curation_status: "curated",
+    series: "1",
     description: "Congratulations, degen!\n\nYou got an exclusive NFT of the Degen POV Whitepaper.\nOnly given to the biggest degens.\n\nHow do we know you're a degen?\nYou got this NFT didn't you?",
-    image: "https://degenpov.me/whitepaper/degenpovcover.png",
-    animation_url: `https://degenpov.me/whitepaper/`,
-    external_url: "https://degenpov.me/whitepaper/degenpovwhitepaper.pdf",
-    attributes: [{ trait_type: "Degen Level", value: "Maximum" }],
+    external_url: `https://degenpov.vercel.app/whitepaper/${cleanId}`,
+    collection_name: "Degen POV Whitepaper",
+    attributes: [
+      { trait_type: "Degen Level", value: "Maximum" },
+      { trait_type: "Type", value: "Degen POV Whitepaper" }
+    ],
+    animation_url: `https://degenpov.vercel.app/whitepaper/${cleanId}`,
+    image: "https://degenpov.vercel.app/whitepaper/degenpovcover.png",
+    interactive_nft: {
+      code_uri: `https://degenpov.vercel.app/whitepaper/${cleanId}`,
+      version: "1.0"
+    },
     properties: {
-      cover_image: "https://degenpov.me/whitepaper/degenpovcover.png",
-      website: "https://degenpov.me/",
-      whitepaper: "https://degenpov.me/whitepaper/degenpovwhitepaper.pdf",
+      cover_image: "https://degenpov.vercel.app/whitepaper/degenpovcover.png",
+      website: "https://degenpov.vercel.app/",
+      whitepaper: "https://degenpov.vercel.app/whitepaper/degenpov_whitepaper.pdf",
       linktree: "https://linktr.ee/degenpovcto"
     }
   };
 }
+
