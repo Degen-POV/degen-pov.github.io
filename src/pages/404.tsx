@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Whitepaper from './whitepaper/[id]';
+import Whitepaper, { generateMetadata } from './whitepaper/[id]';
 
 export default function Custom404() {
   const router = useRouter();
@@ -14,7 +14,8 @@ export default function Custom404() {
       if (id && !isNaN(Number(id))) {
         if (path.endsWith('.json')) {
           const metadata = generateMetadata(id);
-          setContent(<pre>{JSON.stringify(metadata, null, 2)}</pre>);
+          // Set raw JSON content
+          setContent(JSON.stringify(metadata));
         } else {
           setContent(<Whitepaper />);
         }
@@ -29,22 +30,10 @@ export default function Custom404() {
     }
   }, [router.asPath]);
 
-  return content;
-}
+  if (typeof content === 'string' && router.asPath.endsWith('.json')) {
+    // If content is a string (JSON), return it as raw JSON
+    return <>{content}</>;
+  }
 
-function generateMetadata(id: string) {
-  return {
-    name: `Degen POV Whitepaper NFT #${id}`,
-    description: "Congratulations, degen!\n\nYou got an exclusive NFT of the Degen POV Whitepaper.\nOnly given to the biggest degens.\n\nHow do we know you're a degen?\nYou got this NFT didn't you?",
-    image: "https://degenpov.me/whitepaper/degenpovcover.png",
-    animation_url: `https://degenpov.me/whitepaper/`,
-    external_url: "https://degenpov.me/whitepaper/degenpov_whitepaper.pdf",
-    attributes: [{ trait_type: "Degen Level", value: "Maximum" }],
-    properties: {
-      cover_image: "https://degenpov.me/whitepaper/degenpovcover.png",
-      website: "https://degenpov.me/",
-      whitepaper: "https://degenpov.me/whitepaper/degenpovwhitepaper.pdf",
-      linktree: "https://linktr.ee/degenpovcto"
-    }
-  };
+  return content;
 }

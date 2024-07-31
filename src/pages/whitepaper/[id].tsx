@@ -11,17 +11,6 @@ const PageComponent = dynamic(() => import('react-pdf').then(mod => ({ default: 
   ssr: false,
 });
 
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: 'blocking'
-  };
-}
-
-export async function getStaticProps() {
-  return { props: {} };
-}
-
 export default function Whitepaper() {
   const router = useRouter();
   const { id } = router.query;
@@ -45,7 +34,6 @@ export default function Whitepaper() {
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
       const aspectRatio = 1417 / 1062;
-     
       if (viewportWidth / viewportHeight < aspectRatio) {
         setContainerSize({ width: viewportWidth, height: viewportWidth / aspectRatio });
       } else {
@@ -59,10 +47,6 @@ export default function Whitepaper() {
     return () => window.removeEventListener('resize', updateDimensions);
   }, []);
 
-  useEffect(() => {
-    console.log('Whitepaper ID:', id);
-  }, [id]);
-
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
     setNumPages(numPages);
   }
@@ -70,51 +54,68 @@ export default function Whitepaper() {
   return (
     <div className="flex items-center justify-center w-screen h-screen overflow-hidden" style={{ fontFamily: '"Coming Soon", cursive', backgroundColor: '#26437d' }}>
       <div className="flex flex-col items-center" style={{ width: `${containerSize.width}px`, height: `${containerSize.height}px`, backgroundColor: '#26437d' }}>
-      <div className="flex-grow w-full overflow-hidden flex items-center justify-center bg-gray-100"
-      style={{backgroundColor: '#26437d'}} >
-        <PDFViewer
-            file="/whitepaper/degenpov_whitepaper.pdf"
-            onLoadSuccess={onDocumentLoadSuccess}
-            options={options}
-          >
-            <PageComponent
-              pageNumber={pageNumber}
-              width={containerSize.width * 0.95}
-              height={(containerSize.height - 70) * 0.95}
-              renderTextLayer={false}
-              renderAnnotationLayer={false}
-            />
-          </PDFViewer>
-        </div>
-       
-        <div className="flex justify-center items-center mt-2 mb-2 w-full">
-          <button
-            className="px-4 py-2 mr-2 rounded transform transition-transform duration-200 hover:scale-110 flex items-center"
-            style={{ backgroundColor: '#2e4d8f', color: '#ffff33', fontWeight: 'bold' }}
-            onClick={() => setPageNumber(pageNumber - 1)}
-            disabled={pageNumber <= 1}
-          >
-            <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Previous
-          </button>
-          <span className="mx-4" style={{ color: '#ffff33', fontWeight: 'bold' }}>
-            Page {pageNumber} / {numPages}
-          </span>
-          <button
-            className="px-4 py-2 ml-2 rounded transform transition-transform duration-200 hover:scale-110 flex items-center"
-            style={{ backgroundColor: '#2e4d8f', color: '#ffff33', fontWeight: 'bold' }}
-            onClick={() => setPageNumber(pageNumber + 1)}
-            disabled={pageNumber >= (numPages || 0)}
-          >
-            Next
-            <svg className="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </button>
+        <div className="flex-grow w-full overflow-hidden flex items-center justify-center bg-gray-100"
+        style={{backgroundColor: '#26437d'}} >
+          <PDFViewer
+              file="/whitepaper/degenpov_whitepaper.pdf"
+              onLoadSuccess={onDocumentLoadSuccess}
+              options={options}
+            >
+              <PageComponent
+                pageNumber={pageNumber}
+                width={containerSize.width * 0.95}
+                height={(containerSize.height - 70) * 0.95}
+                renderTextLayer={false}
+                renderAnnotationLayer={false}
+              />
+            </PDFViewer>
+          </div>
+         
+          <div className="flex justify-center items-center mt-2 mb-2 w-full">
+            <button
+              className="px-4 py-2 mr-2 rounded transform transition-transform duration-200 hover:scale-110 flex items-center"
+              style={{ backgroundColor: '#2e4d8f', color: '#ffff33', fontWeight: 'bold' }}
+              onClick={() => setPageNumber(pageNumber - 1)}
+              disabled={pageNumber <= 1}
+            >
+              <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Previous
+            </button>
+            <span className="mx-4" style={{ color: '#ffff33', fontWeight: 'bold' }}>
+              Page {pageNumber} / {numPages}
+            </span>
+            <button
+              className="px-4 py-2 ml-2 rounded transform transition-transform duration-200 hover:scale-110 flex items-center"
+              style={{ backgroundColor: '#2e4d8f', color: '#ffff33', fontWeight: 'bold' }}
+              onClick={() => setPageNumber(pageNumber + 1)}
+              disabled={pageNumber >= (numPages || 0)}
+            >
+              Next
+              <svg className="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
   );
+}
+
+export function generateMetadata(id: string) {
+  return {
+    name: `Degen POV Whitepaper NFT #${id}`,
+    description: "Congratulations, degen!\n\nYou got an exclusive NFT of the Degen POV Whitepaper.\nOnly given to the biggest degens.\n\nHow do we know you're a degen?\nYou got this NFT didn't you?",
+    image: "https://degenpov.me/whitepaper/degenpovcover.png",
+    animation_url: `https://degenpov.me/whitepaper/`,
+    external_url: "https://degenpov.me/whitepaper/degenpov_whitepaper.pdf",
+    attributes: [{ trait_type: "Degen Level", value: "Maximum" }],
+    properties: {
+      cover_image: "https://degenpov.me/whitepaper/degenpovcover.png",
+      website: "https://degenpov.me/",
+      whitepaper: "https://degenpov.me/whitepaper/degenpovwhitepaper.pdf",
+      linktree: "https://linktr.ee/degenpovcto"
+    }
+  };
 }
