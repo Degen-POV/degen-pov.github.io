@@ -59,7 +59,7 @@ jobs:
       - name: Build with Next.js
         run: |
           ${{ steps.detect-package-manager.outputs.runner }} next build
-          ${{ steps.detect-package-manager.outputs.runner }} next export -o ./deployment
+          ${{ steps.detect-package-manager.outputs.runner }} next export      
       - name: Generate static pages
         run: |
           mkdir -p ./deployment/whitepaper
