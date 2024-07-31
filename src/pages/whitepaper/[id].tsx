@@ -11,8 +11,11 @@ const PageComponent = dynamic(() => import('react-pdf').then(mod => ({ default: 
   ssr: false,
 });
 
-export function generateStaticParams() {
-  return [{ id: '' }];
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: 'blocking'
+  };
 }
 
 export async function getStaticProps() {
