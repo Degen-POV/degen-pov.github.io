@@ -15,6 +15,7 @@ const PageComponent = dynamic(() => import('react-pdf').then(mod => ({ default: 
 interface WhitepaperProps {
   id: string;
   isJson: boolean;
+  metadata?: string;
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -23,15 +24,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   if (isJson) {
     const metadata = generateMetadata(id);
-    return {
-      props: { id, isJson, metadata: JSON.stringify(metadata) }
-    };
+    context.res.setHeader('Content-Type', 'application/json');
+    context.res.write(JSON.stringify(metadata));
+    context.res.end();
+    return { props: {} };
   }
 
   return { props: { id, isJson } };
 };
 
-export default function Whitepaper({ id, isJson, metadata }: WhitepaperProps & { metadata?: string }) {
+export default function Whitepaper({ id, isJson, metadata }: WhitepaperProps) {
   const router = useRouter();
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -71,7 +73,7 @@ export default function Whitepaper({ id, isJson, metadata }: WhitepaperProps & {
   }
 
   if (isJson) {
-    return <pre>{metadata}</pre>;
+    return null;
   }
 
   return (
