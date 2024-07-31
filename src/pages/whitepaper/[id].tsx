@@ -129,8 +129,9 @@ export default function Whitepaper({ id, isJson, metadata }: WhitepaperProps) {
 }
 
 function generateMetadata(id: string) {
+  const cleanId = id.replace('.json', '');
   return {
-    name: `Degen POV Whitepaper NFT #${id}`,
+    name: `Degen POV Whitepaper NFT #${cleanId}`,
     description: "Congratulations, degen!\n\nYou got an exclusive NFT of the Degen POV Whitepaper.\nOnly given to the biggest degens.\n\nHow do we know you're a degen?\nYou got this NFT didn't you?",
     image: "https://degenpov.me/whitepaper/degenpovcover.png",
     animation_url: `https://degenpov.me/whitepaper/`,
