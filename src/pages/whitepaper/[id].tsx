@@ -135,7 +135,7 @@ function generateMetadata(id: string) {
     description: "Congratulations, degen!\n\nYou got an exclusive NFT of the Degen POV Whitepaper.\nOnly given to the biggest degens.\n\nHow do we know you're a degen?\nYou got this NFT didn't you?",
     image: "https://degenpov.me/whitepaper/degenpovcover.png",
     animation_url: `https://degenpov.me/whitepaper/`,
-    external_url: "https://degenpov.me/whitepaper/degenpov_whitepaper.pdf",
+    external_url: "https://degenpov.me/whitepaper/degenpovwhitepaper.pdf",
     attributes: [{ trait_type: "Degen Level", value: "Maximum" }],
     properties: {
       cover_image: "https://degenpov.me/whitepaper/degenpovcover.png",
