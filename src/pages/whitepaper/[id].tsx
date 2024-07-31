@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next';
 
 const PDFViewer = dynamic(() => import('react-pdf').then(mod => ({ default: mod.Document })), {
   ssr: false,
@@ -11,9 +12,27 @@ const PageComponent = dynamic(() => import('react-pdf').then(mod => ({ default: 
   ssr: false,
 });
 
-export default function Whitepaper() {
+interface WhitepaperProps {
+  id: string;
+  isJson: boolean;
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { id } = context.params as { id: string };
+  const isJson = context.req.url?.endsWith('.json') || false;
+
+  if (isJson) {
+    const metadata = generateMetadata(id);
+    return {
+      props: { id, isJson, metadata: JSON.stringify(metadata) }
+    };
+  }
+
+  return { props: { id, isJson } };
+};
+
+export default function Whitepaper({ id, isJson, metadata }: WhitepaperProps & { metadata?: string }) {
   const router = useRouter();
-  const { id } = router.query;
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
@@ -49,6 +68,10 @@ export default function Whitepaper() {
 
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
     setNumPages(numPages);
+  }
+
+  if (isJson) {
+    return <pre>{metadata}</pre>;
   }
 
   return (
@@ -103,7 +126,7 @@ export default function Whitepaper() {
   );
 }
 
-export function generateMetadata(id: string) {
+function generateMetadata(id: string) {
   return {
     name: `Degen POV Whitepaper NFT #${id}`,
     description: "Congratulations, degen!\n\nYou got an exclusive NFT of the Degen POV Whitepaper.\nOnly given to the biggest degens.\n\nHow do we know you're a degen?\nYou got this NFT didn't you?",

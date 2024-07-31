@@ -1,12 +1,10 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  output: "export",
-  distDir: "deployment",
   images: {
-    unoptimized: true,
+    domains: ['degenpov.me'],
   },
-  trailingSlash: true,
+  reactStrictMode: true,
 };
 
 export default nextConfig;

@@ -1,39 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import Whitepaper, { generateMetadata } from './whitepaper/[id]';
+import React from 'react';
+import Link from 'next/link';
 
 export default function Custom404() {
-  const router = useRouter();
-  const [content, setContent] = useState<React.ReactNode | null>(null);
-
-  useEffect(() => {
-    const path = router.asPath;
-    if (path.startsWith('/whitepaper/')) {
-      const segments = path.split('/');
-      const id = segments[2];
-      if (id && !isNaN(Number(id))) {
-        if (path.endsWith('.json')) {
-          const metadata = generateMetadata(id);
-          // Set raw JSON content
-          setContent(JSON.stringify(metadata));
-        } else {
-          setContent(<Whitepaper />);
-        }
-      }
-    } else {
-      setContent(
-        <div>
-          <h1>404 - Page Not Found</h1>
-          <p>The page you are looking for does not exist.</p>
-        </div>
-      );
-    }
-  }, [router.asPath]);
-
-  if (typeof content === 'string' && router.asPath.endsWith('.json')) {
-    // If content is a string (JSON), return it as raw JSON
-    return <>{content}</>;
-  }
-
-  return content;
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-blue-900 text-yellow-300 font-bold">
+      <h1 className="text-4xl mb-4">404 - Page Not Found</h1>
+      <p className="text-xl mb-8">The page you are looking for does not exist.</p>
+      <Link href="/">
+        <a className="px-4 py-2 bg-yellow-300 text-blue-900 rounded hover:bg-yellow-400 transition-colors">
+          Go back home
+        </a>
+      </Link>
+    </div>
+  );
 }
