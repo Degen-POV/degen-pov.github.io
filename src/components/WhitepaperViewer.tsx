@@ -217,7 +217,7 @@ export default function WhitepaperViewer({ id }: WhitepaperViewerProps) {
             onMouseUp={() => setIsSliderDragging(false)}
             className="h-64 mb-4"
             style={{
-              writingMode: 'bt-lr',
+              writingMode: 'vertical-rl',
               WebkitAppearance: 'slider-vertical',
               transform: 'rotate(180deg)',
             }}
