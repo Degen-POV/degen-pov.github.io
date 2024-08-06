@@ -23,17 +23,7 @@ const PDFViewer = dynamic(() => import('react-pdf').then(mod => ({
   loading: () => <p className="pdf-loading-text" style={{ backgroundColor: '#26437d' }}>Loading PDF...</p>
 });
 
-const PageComponent = dynamic(() => import('react-pdf').then(mod => ({ 
-  default: (props: any) => (
-    <div 
-      onWheel={(e) => e.stopPropagation()}
-      onTouchStart={(e) => e.stopPropagation()}
-      onTouchMove={(e) => e.stopPropagation()}
-    >
-      <mod.Page {...props} />
-    </div>
-  )
-})), {
+const PageComponent = dynamic(() => import('react-pdf').then(mod => ({ default: mod.Page })), {
   ssr: false,
 });
 
@@ -136,7 +126,6 @@ export default function Whitepaper() {
   };
 
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-    e.stopPropagation();
     if (e.touches.length === 2) {
       const touch1 = e.touches[0];
       const touch2 = e.touches[1];
@@ -146,7 +135,6 @@ export default function Whitepaper() {
   };
 
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    e.stopPropagation();
     if (e.touches.length === 2) {
       const touch1 = e.touches[0];
       const touch2 = e.touches[1];
