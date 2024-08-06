@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { GetServerSideProps } from 'next';
 
@@ -50,6 +50,7 @@ export default function Whitepaper() {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [isMouseOver, setIsMouseOver] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const options = useMemo(() => ({
     cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.9.359/cmaps/',
@@ -74,11 +75,31 @@ export default function Whitepaper() {
       }
     };
 
+    const preventScroll = (e: WheelEvent) => {
+      if (containerRef.current && containerRef.current.contains(e.target as Node)) {
+        e.preventDefault();
+      }
+    };
+
+    const handleMouseEnter = () => {
+      (window.top as Window).postMessage({ source: 'DEGEN_POV_NFT', action: 'DISABLE_SCROLL' }, '*');
+    };
+
+    const handleMouseLeave = () => {
+      (window.top as Window).postMessage({ source: 'DEGEN_POV_NFT', action: 'ENABLE_SCROLL' }, '*');
+    };
+
     window.addEventListener('resize', updateDimensions);
+    window.addEventListener('wheel', preventScroll, { passive: false });
+    containerRef.current?.addEventListener('mouseenter', handleMouseEnter);
+    containerRef.current?.addEventListener('mouseleave', handleMouseLeave);
     updateDimensions();
 
     return () => {
       window.removeEventListener('resize', updateDimensions);
+      window.removeEventListener('wheel', preventScroll);
+      containerRef.current?.removeEventListener('mouseenter', handleMouseEnter);
+      containerRef.current?.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
 
@@ -95,12 +116,10 @@ export default function Whitepaper() {
   };
 
   const handleScroll = (e: React.WheelEvent<HTMLDivElement>) => {
-    if (isMouseOver) {
-      e.preventDefault();
-      e.stopPropagation();
-      const delta = e.deltaY > 0 ? -0.1 : 0.1;
-      setScale(prevScale => Math.max(0.5, Math.min(prevScale + delta, 3)));
-    }
+    e.preventDefault();
+    e.stopPropagation();
+    const delta = e.deltaY > 0 ? -0.1 : 0.1;
+    setScale(prevScale => Math.max(0.5, Math.min(prevScale + delta, 3)));
   };
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -151,9 +170,9 @@ export default function Whitepaper() {
     setIsMouseOver(false);
   };
 
-
   return (
     <div
+      ref={containerRef}
       className="flex items-center justify-center w-screen h-screen overflow-hidden pdf-loading-text"
       style={{ fontFamily: '"Coming Soon", cursive', backgroundColor: '#26437d', touchAction: 'none' }}
       onWheel={handleScroll}
