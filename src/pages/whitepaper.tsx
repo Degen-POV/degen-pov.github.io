@@ -49,6 +49,7 @@ export default function Whitepaper() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [isMouseOver, setIsMouseOver] = useState(false);
 
   const options = useMemo(() => ({
     cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.9.359/cmaps/',
@@ -76,12 +77,8 @@ export default function Whitepaper() {
     window.addEventListener('resize', updateDimensions);
     updateDimensions();
 
-    const preventDefault = (e: TouchEvent) => e.preventDefault();
-    document.addEventListener('touchmove', preventDefault, { passive: false });
-
     return () => {
       window.removeEventListener('resize', updateDimensions);
-      document.removeEventListener('touchmove', preventDefault);
     };
   }, []);
 
@@ -98,10 +95,12 @@ export default function Whitepaper() {
   };
 
   const handleScroll = (e: React.WheelEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const delta = e.deltaY > 0 ? -0.1 : 0.1;
-    setScale(prevScale => Math.max(0.5, Math.min(prevScale + delta, 3)));
+    if (isMouseOver) {
+      e.preventDefault();
+      e.stopPropagation();
+      const delta = e.deltaY > 0 ? -0.1 : 0.1;
+      setScale(prevScale => Math.max(0.5, Math.min(prevScale + delta, 3)));
+    }
   };
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -136,6 +135,7 @@ export default function Whitepaper() {
 
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
     if (e.touches.length === 2) {
+      e.preventDefault();
       const touch1 = e.touches[0];
       const touch2 = e.touches[1];
       const distance = Math.hypot(touch1.clientX - touch2.clientX, touch1.clientY - touch2.clientY);
@@ -146,6 +146,12 @@ export default function Whitepaper() {
     }
   };
 
+  const handleMouseLeave = () => {
+    handleMouseUp();
+    setIsMouseOver(false);
+  };
+
+
   return (
     <div
       className="flex items-center justify-center w-screen h-screen overflow-hidden pdf-loading-text"
@@ -154,9 +160,10 @@ export default function Whitepaper() {
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
+      onMouseLeave={handleMouseLeave}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
+      onMouseEnter={() => setIsMouseOver(true)}
     >
       <div className="flex flex-col items-center relative" style={{ width: `${containerSize.width}px`, height: `${containerSize.height}px`, backgroundColor: '#26437d' }}>
         <div className="flex-grow w-full overflow-hidden flex items-center justify-center pdf-loading-text"
