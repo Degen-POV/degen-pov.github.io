@@ -61,11 +61,15 @@ export default function WhitepaperViewer({ id }: WhitepaperViewerProps) {
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
       const aspectRatio = 1417 / 1062;
-      if (viewportWidth / viewportHeight < aspectRatio) {
-        setContainerSize({ width: viewportWidth, height: viewportWidth / aspectRatio });
-      } else {
-        setContainerSize({ width: viewportHeight * aspectRatio, height: viewportHeight });
-      }
+      
+      const scaleByWidth = viewportWidth / 1417;
+      const scaleByHeight = viewportHeight / 1062;
+      const scale = Math.min(scaleByWidth, scaleByHeight);
+      
+      setContainerSize({
+        width: 1417 * scale,
+        height: 1062 * scale
+      });
     };
 
     const preventScroll = (e: WheelEvent) => {
