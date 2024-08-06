@@ -4,5 +4,9 @@
     "cody.edit.preInstruction": "",
     "cody.codeActions.enabled": false,
     "cody.telemetry.level": "off",
-    "cody.autocomplete.disableInsideComments": false
+    "cody.autocomplete.disableInsideComments": false,
+    "cSpell.words": [
+        "Degen",
+        "linktree"
+    ]
 }

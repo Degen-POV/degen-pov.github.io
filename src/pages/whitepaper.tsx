@@ -76,7 +76,13 @@ export default function Whitepaper() {
     window.addEventListener('resize', updateDimensions);
     updateDimensions();
 
-    return () => window.removeEventListener('resize', updateDimensions);
+    const preventDefault = (e: TouchEvent) => e.preventDefault();
+    document.addEventListener('touchmove', preventDefault, { passive: false });
+
+    return () => {
+      window.removeEventListener('resize', updateDimensions);
+      document.removeEventListener('touchmove', preventDefault);
+    };
   }, []);
 
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
@@ -93,6 +99,7 @@ export default function Whitepaper() {
 
   const handleScroll = (e: React.WheelEvent<HTMLDivElement>) => {
     e.preventDefault();
+    e.stopPropagation();
     const delta = e.deltaY > 0 ? -0.1 : 0.1;
     setScale(prevScale => Math.max(0.5, Math.min(prevScale + delta, 3)));
   };
@@ -142,7 +149,7 @@ export default function Whitepaper() {
   return (
     <div
       className="flex items-center justify-center w-screen h-screen overflow-hidden pdf-loading-text"
-      style={{ fontFamily: '"Coming Soon", cursive', backgroundColor: '#26437d' }}
+      style={{ fontFamily: '"Coming Soon", cursive', backgroundColor: '#26437d', touchAction: 'none' }}
       onWheel={handleScroll}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
@@ -239,22 +246,22 @@ function generateMetadata(id: string) {
     curation_status: "curated",
     series: "1",
     description: "Congratulations, degen!\n\nYou got an exclusive NFT of the Degen POV Whitepaper.\nOnly given to the biggest degens.\n\nHow do we know you're a degen?\nYou got this NFT didn't you?",
-    external_url: `https://degenpov.vercel.app/whitepaper/${id}`,
+    external_url: `https://degenpov.me/whitepaper/${id}`,
     collection_name: "Degen POV Whitepaper",
     attributes: [
       { trait_type: "Degen Level", value: "Maximum" },
       { trait_type: "Type", value: "Interactive Whitepaper" }
     ],
-    animation_url: `https://degenpov.vercel.app/whitepaper/${id}`,
-    image: "https://degenpov.vercel.app/whitepaper/degenpovcover.png",
+    animation_url: `https://degenpov.me/whitepaper/${id}`,
+    image: "https://degenpov.me/whitepaper/degenpovcover.png",
     interactive_nft: {
-      code_uri: `https://degenpov.vercel.app/whitepaper/${id}`,
+      code_uri: `https://degenpov.me/whitepaper/${id}`,
       version: "1.0"
     },
     properties: {
-      cover_image: "https://degenpov.vercel.app/whitepaper/degenpovcover.png",
-      website: "https://degenpov.vercel.app/",
-      whitepaper: "https://degenpov.vercel.app/whitepaper/degenpov_whitepaper.pdf",
+      cover_image: "https://degenpov.me/whitepaper/degenpovcover.png",
+      website: "https://degenpov.me/",
+      whitepaper: "https://degenpov.me/whitepaper/degenpovwhitepaper.pdf",
       linktree: "https://linktr.ee/degenpovcto"
     }
   };
