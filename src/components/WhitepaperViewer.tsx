@@ -9,7 +9,7 @@ interface PDFViewerWrapperProps {
 }
 
 const PDFViewerWrapper: React.FC<PDFViewerWrapperProps> = ({ children }) => (
-  <div style={{ backgroundColor: '#26437d', width: '100%', height: '100%' }}>
+  <div className="pdf-background w-full h-full">
     {children}
   </div>
 );
@@ -22,7 +22,7 @@ const PDFViewer = dynamic<DocumentProps>(() => import('react-pdf').then(mod => (
   )
 })), {
   ssr: false,
-  loading: () => <p className="pdf-loading-text" style={{ backgroundColor: '#26437d' }}>Loading PDF...</p>
+  loading: () => <p className="pdf-loading-text">Loading PDF...</p>
 });
 
 const PageComponent = dynamic(() => import('react-pdf').then(mod => ({ default: mod.Page })), {
@@ -140,8 +140,8 @@ export default function WhitepaperViewer({ id }: WhitepaperViewerProps) {
   return (
     <div
       ref={containerRef}
-      className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden pdf-loading-text"
-      style={{ fontFamily: '"Coming Soon", cursive', backgroundColor: '#26437d', touchAction: 'none' }}
+      className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden pdf-loading-text pdf-background"
+      style={{ touchAction: 'none' }}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
@@ -150,8 +150,7 @@ export default function WhitepaperViewer({ id }: WhitepaperViewerProps) {
     >
       <div className="flex items-center mb-4">
         <button
-          className="p-2 mr-2 rounded transform transition-transform duration-200 hover:scale-110 flex items-center justify-center"
-          style={{ backgroundColor: '#2e4d8f', color: '#ffff33', fontWeight: 'bold' }}
+          className="pdf-button mr-2 rounded transform transition-transform duration-200 hover:scale-110 flex items-center justify-center"
           onClick={() => handleZoomChange(Math.max(scale - 0.1, 0.5))}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style={{ filter: 'url(#hand-drawn)' }}>
@@ -170,8 +169,7 @@ export default function WhitepaperViewer({ id }: WhitepaperViewerProps) {
           className="w-64 mx-4"
         />
         <button
-          className="p-2 ml-2 rounded transform transition-transform duration-200 hover:scale-110 flex items-center justify-center"
-          style={{ backgroundColor: '#2e4d8f', color: '#ffff33', fontWeight: 'bold' }}
+          className="pdf-button ml-2 rounded transform transition-transform duration-200 hover:scale-110 flex items-center justify-center"
           onClick={() => handleZoomChange(Math.min(scale + 0.1, 3))}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style={{ filter: 'url(#hand-drawn)' }}>
@@ -179,8 +177,7 @@ export default function WhitepaperViewer({ id }: WhitepaperViewerProps) {
           </svg>
         </button>
       </div>
-      <div className="flex-grow w-full overflow-hidden flex items-center justify-center pdf-loading-text"
-      style={{backgroundColor: '#26437d', position: 'relative'}} >
+      <div className="flex-grow w-full overflow-hidden flex items-center justify-center pdf-loading-text pdf-background relative">
         <div style={{ transform: `scale(${scale}) translate(${position.x}px, ${position.y}px)`, transition: 'transform 0.1s' }}>
           <PDFViewer
             file="/whitepaper/degenpovwhitepaper.pdf"
@@ -202,8 +199,7 @@ export default function WhitepaperViewer({ id }: WhitepaperViewerProps) {
       </div>
       <div className="flex justify-center items-center mt-4 w-full">
         <button
-          className="px-4 py-2 mr-2 rounded transform transition-transform duration-200 hover:scale-110 flex items-center"
-          style={{ backgroundColor: '#2e4d8f', color: '#ffff33', fontWeight: 'bold' }}
+          className="pdf-button px-4 py-2 mr-2 rounded transform transition-transform duration-200 hover:scale-110 flex items-center"
           onClick={() => setPageNumber(pageNumber - 1)}
           disabled={pageNumber <= 1}
         >
@@ -212,12 +208,11 @@ export default function WhitepaperViewer({ id }: WhitepaperViewerProps) {
           </svg>
           Previous
         </button>
-        <span className="mx-4" style={{ color: '#ffff33', fontWeight: 'bold' }}>
+        <span className="mx-4 pdf-text">
           Page {pageNumber} / {numPages}
         </span>
         <button
-          className="px-4 py-2 ml-2 rounded transform transition-transform duration-200 hover:scale-110 flex items-center"
-          style={{ backgroundColor: '#2e4d8f', color: '#ffff33', fontWeight: 'bold' }}
+          className="pdf-button px-4 py-2 ml-2 rounded transform transition-transform duration-200 hover:scale-110 flex items-center"
           onClick={() => setPageNumber(pageNumber + 1)}
           disabled={pageNumber >= (numPages || 0)}
         >
@@ -235,5 +230,4 @@ export default function WhitepaperViewer({ id }: WhitepaperViewerProps) {
       </svg>
     </div>
   );
-
 }
