@@ -1,4 +1,4 @@
-@import "@fontsource/coming-soon"; /* Import the Google Font */
+@import "@fontsource/coming-soon";
 
 /* Tailwind base styles */
 @tailwind base;
@@ -6,7 +6,7 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 255, 255, 255; /* White text color */
+  --foreground-rgb: 255, 255, 51; /* Yellow text color */
   --background-rgb: 38, 67, 125; /* Blue background color */
 }
 
@@ -16,7 +16,13 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Coming Soon", cursive; /* Apply the Google Font */
+  font-family: "Coming Soon", cursive;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+canvas {
+  background-color: rgb(var(--background-rgb));
 }
 
 /* Ensure text wraps at spaces */
@@ -33,6 +39,14 @@ body {
 main {
   max-width: 95%;
   margin: 0 auto;
+}
+
+.pdf-loading-text {
+  background-color: rgb(var(--background-rgb));
+  font-family: 'Coming Soon', cursive;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: rgb(var(--foreground-rgb));
 }
 
 @layer utilities {

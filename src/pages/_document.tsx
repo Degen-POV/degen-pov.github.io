@@ -3,30 +3,19 @@ import Document, { Html, Head, Main, NextScript } from 'next/document'
 class MyDocument extends Document {
   render() {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet" />
-        <style>{`
-          body {
-            background-color: '#26437d';
-          }
-          canvas {
-            background-color: '#26437d';
-          }
-
-          .pdf-loading-text {
-            background: '#26437d';
-            background_color: '#26437d';
-            background-color: '#26437d';
-            font-family: 'Coming Soon', cursive;
-            font-weight: bold;
-            font-size: 1.5rem;
-            color: #ffff33;
-          }
-        `}</style>
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet" />
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:site" content="your degen pov" />
+          <meta name="twitter:creator" content="Degen POV CTO" />
+          <meta property="og:url" content="https://degenpov.me" />
+          <meta property="og:title" content="your degen pov" />
+          <meta property="og:description" content="We're all degens here..." />
+          <meta property="og:image" content="https://degenpov.me/card.png" />
         </Head>
-        <body style={{ backgroundColor: '#26437d', fontWeight: 'bold', fontFamily: '"Coming Soon", cursive', fontSize: '1.5rem', color:'#ffff33' }}>
+        <body>
           <Main />
           <NextScript />
         </body>

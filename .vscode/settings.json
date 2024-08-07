@@ -1,6 +1,6 @@
 {
     "cody.codebase": "https://github.com/Degen-POV/degen-pov.github.io",
-    "cody.chat.preInstruction": "Please provide 100% complete code files without anything being omitted anywhere.",
+    "cody.chat.preInstruction": "When providing code do not omit anything anywhere.",
     "cody.edit.preInstruction": "",
     "cody.codeActions.enabled": false,
     "cody.telemetry.level": "off",
