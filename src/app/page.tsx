@@ -9,15 +9,23 @@ import "@fontsource/coming-soon"; // Import the Google Font
 export default function Home() {
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const [tooltipOpacity, setTooltipOpacity] = useState(1);
 
   const handleCopy = (e: React.MouseEvent) => {
     navigator.clipboard.writeText("0x4c96A67b0577358894407AF7Bc3158fC1DfFbeB5");
-    setTooltipPosition({ x: e.clientX - 900, y: e.clientY - 850 }); // Increase the offset
+    setTooltipPosition({ x: e.clientX, y: e.clientY });
     setTooltipVisible(true);
+    setTooltipOpacity(1);
+    
+    setTimeout(() => {
+      setTooltipOpacity(0);
+    }, 1500);
+  
     setTimeout(() => {
       setTooltipVisible(false);
     }, 2000);
   };
+
 
   return (
     <main
@@ -67,21 +75,20 @@ export default function Home() {
             />
 
             {tooltipVisible && (
-  <div
-    className="absolute bg-gray-700 text-white p-2 rounded-lg transition-opacity duration-500"
-    style={{
-      top: tooltipPosition.y - 10,
-      left: tooltipPosition.x,
-      transform: 'translate(-50%, -100%)',
-      whiteSpace: "nowrap",
-    }}
-  >
-    <div className="relative">
-      copied, you degen
-      <div className="absolute w-3 h-3 bg-gray-700 transform rotate-45 left-1/2 -bottom-1.5 -ml-1.5"></div>
-    </div>
-  </div>
-)}
+              <div
+                className="fixed bg-gray-700 text-white p-2 rounded-lg"
+                style={{
+                  top: tooltipPosition.y - 62,
+                  left: tooltipPosition.x - 105,
+                  pointerEvents: 'none',
+                  opacity: tooltipOpacity,
+                  transition: 'opacity 0.5s ease-out'
+                }}
+              >
+                copied, you degen
+              </div>
+            )}
+
 
 
           </div>
