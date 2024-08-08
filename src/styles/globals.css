@@ -8,6 +8,7 @@
 :root {
   --foreground-rgb: 255, 255, 51; /* Yellow text color */
   --background-rgb: 38, 67, 125; /* Blue background color */
+  --button-bg-color: #1e3260; /* Button background color */
 }
 
 body {
@@ -47,6 +48,22 @@ main {
   font-weight: bold;
   font-size: 1.5rem;
   color: rgb(var(--foreground-rgb));
+}
+
+.pdf-button {
+  background-color: var(--button-bg-color);
+}
+
+input[type="number"] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 @layer utilities {

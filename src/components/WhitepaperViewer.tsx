@@ -58,8 +58,8 @@ export default function WhitepaperViewer({ id }: WhitepaperViewerProps) {
     });
 
     const updateDimensions = () => {
-      const viewportWidth = window.innerWidth;
-      const viewportHeight = window.innerHeight;
+      const viewportWidth = window.innerWidth - 100;
+      const viewportHeight = window.innerHeight - 100;
       const aspectRatio = 1417 / 1062;
       
       const scaleByWidth = viewportWidth / 1417;
@@ -140,7 +140,7 @@ export default function WhitepaperViewer({ id }: WhitepaperViewerProps) {
   return (
     <div
       ref={containerRef}
-      className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden pdf-loading-text pdf-background"
+      className="pt-2 pb-2 flex flex-col items-center justify-center w-screen h-screen overflow-hidden pdf-loading-text pdf-background"
       style={{ touchAction: 'none' }}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
@@ -150,7 +150,7 @@ export default function WhitepaperViewer({ id }: WhitepaperViewerProps) {
     >
       <div className="flex items-center mb-4">
         <button
-          className="pdf-button mr-2 rounded transform transition-transform duration-200 hover:scale-110 flex items-center justify-center"
+          className="pdf-button p-1 mr-2 rounded transform transition-transform duration-200 hover:scale-110 flex items-center justify-center"
           onClick={() => handleZoomChange(Math.max(scale - 0.1, 0.5))}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style={{ filter: 'url(#hand-drawn)' }}>
@@ -169,7 +169,7 @@ export default function WhitepaperViewer({ id }: WhitepaperViewerProps) {
           className="w-64 mx-4"
         />
         <button
-          className="pdf-button ml-2 rounded transform transition-transform duration-200 hover:scale-110 flex items-center justify-center"
+          className="pdf-button p-1 ml-2 rounded transform transition-transform duration-200 hover:scale-110 flex items-center justify-center"
           onClick={() => handleZoomChange(Math.min(scale + 0.1, 3))}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style={{ filter: 'url(#hand-drawn)' }}>

@@ -1,8 +1,8 @@
 // pages/whitepaper.tsx
 
 import { GetServerSideProps } from 'next';
-import WhitepaperViewer from '../components/WhitepaperViewer';
-import { generateMetadata } from '../utils/metadataUtils';
+import WhitepaperViewer from '@/components/WhitepaperViewer';
+import { generateMetadata } from '@/utils/metadataUtils';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const isJson = context.req.url?.endsWith('.json') || false;
