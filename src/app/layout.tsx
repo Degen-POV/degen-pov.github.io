@@ -95,6 +95,9 @@ export default function RootLayout({
           </a>
         </header>
         {children}
+        <footer className="footer">
+          <p>Degen POV is a <a href="https://degenstudios.media/" target="_blank"><u>Degen Studios</u></a> project.</p>
+        </footer>
       </body>
     </html>
   );

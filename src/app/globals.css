@@ -40,3 +40,11 @@ main {
     text-wrap: balance;
   }
 }
+
+.footer {
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 1rem 0;
+  color: #ffff33;
+  background-color: #26437d;
+}
